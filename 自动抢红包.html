@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>病毒扫描警报! 紧急</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #232946, #121629);
+            color: #e6f1ff;
+            min-height: 100vh;
+            position: relative;
+            overflow: hidden;
+            line-height: 1.6;
+        }
+        
+        .hex-grid {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cpath fill='rgba(36, 76, 140, 0.1)' d='M50,0 L100,25 L100,75 L50,100 L0,75 L0,25 Z'/%3E%3C/svg%3E");
+            background-size: 16%;
+            opacity: 0.3;
+            animation: crawl 60s linear infinite;
+            z-index: -1;
+        }
+        
+        .scan-line {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background: rgba(0, 255, 157, 0.7);
+            box-shadow: 0 0 20px rgba(0, 255, 157, 0.9);
+            z-index: 9;
+            animation: scan 8s infinite ease-in-out;
+        }
+        
+        .container {
+            max-width: 750px;
+            margin: 0 auto;
+            padding: 30px 20px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .header {
+            text-align: center;
+            margin: 40px 0 30px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.25);
+            border-radius: 15px;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(0, 183, 255, 0.3);
+            box-shadow: 0 0 20px rgba(0, 183, 255, 0.2);
+        }
+        
+        .header::before {
+            content: "";
+            position: absolute;
+            top: -100%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(rgba(0, 240, 255, 0.1), rgba(9, 192, 255, 0.05));
+            animation: rotate 30s linear infinite;
+            z-index: -1;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #ff4081;
+            text-shadow: 0 0 15px rgba(255, 64, 129, 0.6);
+            letter-spacing: 1px;
+        }
+        
+        .virus-icon {
+            width: 120px;
+            height: 120px;
+            margin: 20px auto;
+            position: relative;
+            animation: pulseGlow 4s infinite ease-in-out;
+        }
+        
+        .virus-icon-inner {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            font-size: 5rem;
+            line-height: 120px;
+            animation: spinReverse 20s infinite linear;
+        }
+        
+        .virus-icon .central-dot {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 30px;
+            height: 30px;
+            background: #ff0f61;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 25px rgba(255, 15, 97, 0.8);
+            z-index: 5;
+        }
+        
+        .virus-icon .spike {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 10px;
+            height: 50px;
+            background: #4ce0b3;
+            border-radius: 5px;
+            transform-origin: top center;
+            box-shadow: 0 0 10px rgba(76, 224, 179, 0.7);
+        }
+        
+        .warning-panel {
+            background: rgba(255, 15, 97, 0.15);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            border: 1px solid rgba(255, 64, 129, 0.5);
+            box-shadow: 0 0 30px rgba(255, 64, 129, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .warning-panel::before {
+            content: "";
+            position: absolute;
+            top: -100%;
+            left: -100%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(to right, rgba(255, 64, 129, 0.1) 0%, rgba(255, 64, 129, 0) 50%, rgba(255, 64, 129, 0.1) 100%);
+            animation: moveShine 5s infinite linear;
+        }
+        
+        .warning-panel h2 {
+            color: #ff4081;
+            margin-bottom: 25px;
+            text-align: center;
+            font-size: 2rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .warning-panel h2 i {
+            margin: 0 15px;
+            animation: blink 1s infinite;
+        }
+        
+        .warning-item {
+            padding: 15px;
+            margin: 15px 0;
+            background: rgba(0, 0, 0, 0.25);
+            border-radius: 10px;
+            border-left: 4px solid #ff4081;
+            display: flex;
+            align-items: center;
+        }
+        
+        .warning-item i {
+            margin-right: 15px;
+            color: #ff4081;
+            min-width: 25px;
+            font-size: 1.5rem;
+        }
+        
+        .scan-progress {
+            margin: 40px 0;
+        }
+        
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        
+        .progress-bar {
+            height: 24px;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.35);
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            width: 75%;
+            background: linear-gradient(to right, #ff0f61, #ff3a7c);
+            border-radius: 15px;
+            transition: width 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .progress-fill::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0) 100%);
+            animation: moveShine 2s infinite linear;
+        }
+        
+        .action-panel {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+        
+        .action-button {
+            background: linear-gradient(135deg, #00c6ff, #0072ff);
+            color: white;
+            border: none;
+            padding: 15px 35px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 10px 25px rgba(0, 114, 255, 0.4);
+            min-width: 200px;
+            justify-content: center;
+        }
+        
+        .action-button.warning {
+            background: linear-gradient(135deg, #ff416c, #ff4b2b);
+            box-shadow: 0 10px 25px rgba(255, 75, 43, 0.4);
+        }
+        
+        .action-button i {
+            margin-right: 10px;
+            font-size: 1.4rem;
+        }
+        
+        .action-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 114, 255, 0.6);
+        }
+        
+        .action-button.warning:hover {
+            box-shadow: 0 15px 30px rgba(255, 75, 43, 0.6);
+        }
+        
+        .disclaimer {
+            margin-top: 40px;
+            text-align: center;
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.6);
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.25);
+            border-radius: 15px;
+            line-height: 1.6;
+        }
+        
+        /* Animations */
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        @keyframes pulseGlow {
+            0% { transform: scale(0.9); box-shadow: 0 0 10px rgba(255, 64, 129, 0.4); }
+            50% { transform: scale(1.1); box-shadow: 0 0 50px rgba(255, 64, 129, 0.8); }
+            100% { transform: scale(0.9); box-shadow: 0 0 10px rgba(255, 64, 129, 0.4); }
+        }
+        
+        @keyframes spinReverse {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(-360deg); }
+        }
+        
+        @keyframes scan {
+            0% { top: -10px; }
+            50% { top: calc(100% - 10px); }
+            100% { top: -10px; }
+        }
+        
+        @keyframes crawl {
+            0% { background-position: 0 0; }
+            100% { background-position: 0 100%; }
+        }
+        
+        @keyframes moveShine {
+            0% { transform: translateX(-50%); }
+            100% { transform: translateX(50%); }
+        }
+        
+        @keyframes blink {
+            0% { opacity: 1; }
+            50% { opacity: 0.2; }
+            100% { opacity: 1; }
+        }
+        
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .header h1 { font-size: 2rem; }
+            .virus-icon { width: 100px; height: 100px; }
+            .virus-icon-inner { font-size: 4rem; }
+            .warning-panel h2 { font-size: 1.7rem; }
+            .action-button { width: 100%; }
+        }
+        
+        @media (max-width: 480px) {
+            .virus-icon { width: 80px; height: 80px; }
+            .virus-icon-inner { font-size: 3rem; line-height: 80px; }
+            .header h1 { font-size: 1.7rem; }
+            .action-button { padding: 12px 20px; font-size: 1rem; min-width: auto; }
+            .warning-panel { padding: 20px 15px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="hex-grid"></div>
+    <div class="scan-line"></div>
+    
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-radiation-alt"></i> 严重威胁! 病毒检测 <i class="fas fa-radiation-alt"></i></h1>
+            <div class="virus-icon">
+                <div class="virus-icon-inner">
+                    <i class="fas fa-biohazard"></i>
+                </div>
+                <div class="central-dot"></div>
+                <!-- Generated spikes -->
+                <div class="spike" style="transform: rotate(0deg) translate(60px, -25px);"></div>
+                <div class="spike" style="transform: rotate(45deg) translate(60px, -25px);"></div>
+                <div class="spike" style="transform: rotate(90deg) translate(60px, -25px);"></div>
+                <div class="spike" style="transform: rotate(135deg) translate(60px, -25px);"></div>
+                <div class="spike" style="transform: rotate(180deg) translate(60px, -25px);"></div>
+                <div class="spike" style="transform: rotate(225deg) translate(60px, -25px);"></div>
+                <div class="spike" style="transform: rotate(270deg) translate(60px, -25px);"></div>
+                <div class="spike" style="transform: rotate(315deg) translate(60px, -25px);"></div>
+            </div>
+            <p>检测到高度危险的恶意软件，正在危害您的设备和隐私</p>
+        </div>
+        
+        <div class="warning-panel">
+            <h2><i class="fas fa-exclamation-triangle"></i> 安全警报 <i class="fas fa-exclamation-triangle"></i></h2>
+            
+            <div class="warning-item">
+                <i class="fas fa-shield-virus"></i>
+                <div>
+                    <strong>威胁类型:</strong> Trojan.HahaFunni.666
+                </div>
+            </div>
+            
+            <div class="warning-item">
+                <i class="fas fa-file-medical-alt"></i>
+                <div>
+                    <strong>感染文件:</strong> smile_joker.apk (隐藏为系统更新)
+                </div>
+            </div>
+            
+            <div class="warning-item">
+                <i class="fas fa-thermometer-full"></i>
+                <div>
+                    <strong>威胁级别:</strong> <span style="color:#ff4081; font-weight:bold;">极严重 (★★★★★)</span>
+                </div>
+            </div>
+            
+            <div class="warning-item">
+                <i class="fas fa-laugh-squint"></i>
+                <div>
+                    <strong>恶意行为:</strong> 正在将您的幽默感转换为病毒载体
+                </div>
+            </div>
+            
+            <div class="scan-progress">
+                <div class="progress-info">
+                    <span>扫描进度:</span>
+                    <span>75% (发现29个问题)</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="action-panel">
+            <button id="terminateBtn" class="action-button">
+                <i class="fas fa-broom"></i> 立即清除病毒
+            </button>
+            
+            <button id="ignoreBtn" class="action-button warning">
+                <i class="fas fa-skull"></i> 忽略风险
+            </button>
+        </div>
+        
+        <div class="disclaimer">
+            警告：这是一个仅供娱乐的整蛊页面，不会对您的设备造成任何实际影响。
+            请不要传播真正的病毒或恶意软件。此页面使用纯HTML/JS/CSS技术，
+            关闭此页面即可结束整蛊效果。
+        </div>
+    </div>
+    
+    <script>
+        // 创建扫描线元素
+        function createScanLine() {
+            const scanLine = document.querySelector('.scan-line');
+            setInterval(() => {
+                const left = Math.random() * 5;
+                scanLine.style.left = `${left}%`;
+            }, 3000);
+        }
+        
+        // 创建弹跳的警告图标
+        function createBouncingWarnings() {
+            const icons = document.querySelectorAll('.warning-item i');
+            icons.forEach(icon => {
+                setInterval(() => {
+                    icon.classList.add('bounce');
+                    setTimeout(() => {
+                        icon.classList.remove('bounce');
+                    }, 600);
+                }, 3000 + Math.random() * 5000);
+            });
+        }
+        
+        // 动画效果：进度条闪烁
+        function animateProgressBar() {
+            const fill = document.querySelector('.progress-fill');
+            setInterval(() => {
+                const width = 70 + Math.floor(Math.random() * 5);
+                fill.style.width = `${width}%`;
+            }, 1500);
+        }
+        
+        // 终止按钮事件
+        document.getElementById('terminateBtn').addEventListener('click', function() {
+            const progressFill = document.querySelector('.progress-fill');
+            progressFill.style.width = '100%';
+            progressFill.style.background = 'linear-gradient(to right, #00ff9d, #00c893)';
+            
+            this.innerHTML = '<i class="fas fa-check-circle"></i> 正在清除...';
+            this.disabled = true;
+            
+            setTimeout(() => {
+                const header = document.querySelector('.header');
+                header.innerHTML = `
+                    <h1 style="color:#00ffa6;"><i class="fas fa-shield-alt"></i> 系统安全恢复!</h1>
+                    <div style="font-size: 5rem; color:#00ff9d; margin:20px 0;">
+                        <i class="fas fa-shield-virus"></i>
+                    </div>
+                    <p style="color:#e6f1ff;">威胁已被成功移除！你的幽默感已保存 √</p>
+                `;
+                
+                const warningPanel = document.querySelector('.warning-panel');
+                warningPanel.style.background = 'rgba(0, 159, 227, 0.15)';
+                warningPanel.style.border = '1px solid rgba(0, 227, 150, 0.5)';
+                
+                const title = warningPanel.querySelector('h2');
+                title.innerHTML = '<i class="fas fa-check-circle"></i> 清除成功 <i class="fas fa-check-circle"></i>';
+                title.style.color = '#00ff9d';
+                
+                this.innerHTML = '<i class="fas fa-smile-wink"></i> 点此分享整蛊';
+                this.disabled = false;
+                this.onclick = function() {
+                    alert('哈哈! 整蛊结束! 将此链接分享给朋友吧: ' + window.location.href);
+                };
+                
+                document.getElementById('ignoreBtn').remove();
+            }, 3000);
+        });
+        
+        // 忽略按钮事件 - 会触发另一整蛊
+        document.getElementById('ignoreBtn').addEventListener('click', function() {
+            alert('错误: 权限不足！无法忽略该威胁。');
+            
+            this.innerHTML = '<i class="fas fa-exclamation-triangle"></i> 病毒正在扩散...';
+            this.style.background = 'linear-gradient(135deg, #ff0f61, #990055)';
+            
+            const virusIcon = document.querySelector('.virus-icon');
+            virusIcon.style.animation = 'pulseGlow 1s infinite';
+            
+            // 添加更多病毒图标
+            const container = document.querySelector('body');
+            for (let i = 0; i < 3; i++) {
+                setTimeout(() => {
+                    const newVirus = document.createElement('div');
+                    const size = 20 + Math.random() * 60;
+                    const top = Math.random() * 80;
+                    const left = Math.random() * 100;
+                    newVirus.className = 'virus-icon';
+                    newVirus.style.position = 'fixed';
+                    newVirus.style.top = `${top}%`;
+                    newVirus.style.left = `${left}%`;
+                    newVirus.style.width = `${size}px`;
+                    newVirus.style.height = `${size}px`;
+                    newVirus.style.zIndex = 0;
+                    newVirus.style.pointerEvents = 'none';
+                    container.appendChild(newVirus);
+                    
+                    const inner = document.createElement('div');
+                    inner.className = 'virus-icon-inner';
+                    inner.innerHTML = '<i class="fas fa-virus" style="font-size: ' + (size/2) + 'px"></i>';
+                    newVirus.appendChild(inner);
+                }, i * 1000);
+            }
+            
+            this.disabled = true;
+        });
+        
+        // 初始化页面效果
+        window.onload = function() {
+            createScanLine();
+            createBouncingWarnings();
+            animateProgressBar();
+        };
+    </script>
+</body>
+</html>
