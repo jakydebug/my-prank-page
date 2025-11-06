@@ -1,0 +1,1462 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>天下行一汽丰田授权4S店 - 专业汽车销售与服务体系</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --toyota-red: #db0011;
+            --toyota-red-dark: #af000d;
+            --toyota-black: #1a1a1a;
+            --light-gray: #f8f8f8;
+            --medium-gray: #e6e6e6;
+            --dark-gray: #555;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+        }
+        
+        body {
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-color: #fff;
+        }
+        
+        /* 布局容器 */
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        /* 动画效果 */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        /* 顶部导航栏 */
+        header {
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        
+        .top-bar {
+            background-color: var(--toyota-black);
+            color: white;
+            padding: 10px 0;
+            font-size: 0.9rem;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .flex {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .contact-info span {
+            margin-right: 25px;
+            display: inline-block;
+        }
+        
+        .contact-info i {
+            margin-right: 8px;
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 16px;
+        }
+        
+        .social-icons a {
+            color: white;
+            text-decoration: none;
+            transition: transform 0.2s;
+        }
+        
+        .social-icons a:hover {
+            color: #f0f0f0;
+            transform: translateY(-2px);
+        }
+        
+        .header-main {
+            padding: 15px 0;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo {
+            height: 55px;
+            margin-right: 15px;
+        }
+        
+        .logo-text {
+            font-weight: 700;
+            font-size: 24px;
+            color: var(--toyota-red);
+        }
+        
+        .logo-subtext {
+            font-size: 13px;
+            color: var(--dark-gray);
+            letter-spacing: 1px;
+        }
+        
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+        
+        nav ul li {
+            margin: 0 18px;
+            position: relative;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: var(--toyota-black);
+            font-weight: 500;
+            transition: color 0.3s;
+            font-size: 16px;
+            padding: 8px 0;
+            position: relative;
+        }
+        
+        nav ul li a:hover,
+        nav ul li a.active {
+            color: var(--toyota-red);
+        }
+        
+        nav ul li a::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background-color: var(--toyota-red);
+            transition: width 0.3s;
+        }
+        
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--toyota-black);
+        }
+        
+        .cta-button {
+            background-color: var(--toyota-red);
+            color: white;
+            border: none;
+            padding: 12px 28px;
+            font-weight: 600;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 4px 15px rgba(219, 0, 17, 0.2);
+        }
+        
+        .cta-button:hover {
+            background-color: var(--toyota-red-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 7px 18px rgba(219, 0, 17, 0.35);
+        }
+        
+        /* 英雄区域 */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                        url('https://images.unsplash.com/photo-1602030028438-4cf153cbae9e?q=80&w=1800&auto=format&fit=crop') center/cover no-repeat;
+            color: white;
+            display: flex;
+            align-items: center;
+            padding-top: 120px;
+            animation: fadeIn 1.5s ease;
+        }
+        
+        .hero-content {
+            width: 50%;
+            max-width: 650px;
+        }
+        
+        .hero h1 {
+            font-size: 3.8rem;
+            margin-bottom: 25px;
+            line-height: 1.15;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .hero p {
+            font-size: 1.35rem;
+            margin-bottom: 40px;
+            max-width: 600px;
+            font-weight: 300;
+            opacity: 0.9;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .hero-buttons .cta-button:last-child {
+            background: transparent;
+            border: 2px solid white;
+        }
+        
+        .hero-buttons .cta-button:last-child:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        /* 快速链接 */
+        .quick-links {
+            background-color: var(--toyota-black);
+            padding: 30px 0;
+            transform: translateY(-50px);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            position: relative;
+            z-index: 100;
+        }
+        
+        .quick-links-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 20px;
+            text-align: center;
+        }
+        
+        .quick-link-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 25px 15px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            color: white;
+        }
+        
+        .quick-link-item:hover {
+            background: var(--toyota-red);
+            transform: translateY(-5px);
+        }
+        
+        .quick-link-item i {
+            font-size: 40px;
+            margin-bottom: 15px;
+        }
+        
+        .quick-link-item h3 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+        
+        .quick-link-item p {
+            font-size: 0.9rem;
+            opacity: 0.85;
+        }
+        
+        /* 主力车型展示 */
+        .vehicle-showcase {
+            padding: 70px 0 100px;
+            background-color: var(--light-gray);
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+        }
+        
+        .section-title h2 {
+            font-size: 2.8rem;
+            color: var(--toyota-black);
+            display: inline-block;
+            padding-bottom: 15px;
+            position: relative;
+            font-weight: 700;
+        }
+        
+        .section-title h2::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 5px;
+            background-color: var(--toyota-red);
+            border-radius: 10px;
+        }
+        
+        .section-title p {
+            max-width: 700px;
+            margin: 15px auto 0;
+            color: var(--dark-gray);
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+        
+        .vehicle-filter {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+        
+        .filter-btn {
+            background: white;
+            color: var(--dark-gray);
+            border: 2px solid var(--medium-gray);
+            padding: 10px 25px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+        
+        .filter-btn.active, .filter-btn:hover {
+            background-color: var(--toyota-red);
+            color: white;
+            border-color: var(--toyota-red);
+        }
+        
+        .vehicles {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+        }
+        
+        .vehicle-card {
+            background-color: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s ease;
+            position: relative;
+            animation: fadeIn 0.8s ease;
+        }
+        
+        .vehicle-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 16px 35px rgba(0, 0, 0, 0.15);
+        }
+        
+        .badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background-color: var(--toyota-red);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            z-index: 1;
+        }
+        
+        .vehicle-img {
+            height: 230px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        
+        .vehicle-info {
+            padding: 25px 30px 30px;
+        }
+        
+        .vehicle-info h3 {
+            font-size: 1.8rem;
+            color: var(--toyota-black);
+            margin-bottom: 8px;
+        }
+        
+        .price {
+            color: var(--toyota-red);
+            font-weight: 700;
+            font-size: 1.5rem;
+            margin: 10px 0 18px;
+            display: block;
+        }
+        
+        .specs {
+            display: flex;
+            flex-wrap: wrap;
+            border-top: 1px solid var(--medium-gray);
+            padding-top: 20px;
+            margin-bottom: 22px;
+        }
+        
+        .spec {
+            width: 50%;
+            margin-bottom: 12px;
+            font-size: 0.95rem;
+            display: flex;
+        }
+        
+        .spec i {
+            color: var(--toyota-red);
+            margin-right: 10px;
+            font-size: 1.1rem;
+            min-width: 25px;
+        }
+        
+        .vehicle-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        /* 服务区域 */
+        .services {
+            padding: 100px 0;
+            background-color: white;
+        }
+        
+        .services-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 35px;
+        }
+        
+        .service-card {
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            background: white;
+            animation: fadeIn 0.8s ease;
+        }
+        
+        .service-card:hover {
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+            transform: translateY(-10px);
+        }
+        
+        .service-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 0;
+            background-color: var(--toyota-red);
+            transition: height 0.5s ease;
+        }
+        
+        .service-card:hover::before {
+            height: 100%;
+        }
+        
+        .service-icon {
+            font-size: 48px;
+            color: var(--toyota-red);
+            margin-bottom: 25px;
+        }
+        
+        .service-card h3 {
+            font-size: 1.7rem;
+            margin-bottom: 15px;
+            color: var(--toyota-black);
+        }
+        
+        .service-card p {
+            color: var(--dark-gray);
+            margin-bottom: 25px;
+            line-height: 1.8;
+        }
+        
+        /* 促销活动 */
+        .promotion {
+            padding: 100px 0;
+            background: linear-gradient(135deg, var(--toyota-red) 0%, var(--toyota-red-dark) 100%);
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .promotion::before {
+            content: "";
+            position: absolute;
+            top: -250px;
+            right: -150px;
+            width: 700px;
+            height: 700px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+        }
+        
+        .promotion::after {
+            content: "";
+            position: absolute;
+            bottom: -300px;
+            left: -200px;
+            width: 800px;
+            height: 800px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.03);
+        }
+        
+        .promo-content {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .promo-content h2 {
+            font-size: 3.2rem;
+            margin-bottom: 20px;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .promo-content p {
+            font-size: 1.3rem;
+            margin-bottom: 40px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+        
+        .countdown-item {
+            background-color: rgba(255, 255, 255, 0.2);
+            width: 120px;
+            height: 120px;
+            padding: 15px 0;
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .countdown-number {
+            font-size: 2.8rem;
+            font-weight: 800;
+            margin-bottom: 5px;
+            line-height: 1;
+        }
+        
+        /* 客户服务 */
+        .customer-message {
+            padding: 100px 0;
+            background-color: var(--light-gray);
+        }
+        
+        .testimonials {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .testimonial-card {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
+            margin: 20px;
+            position: relative;
+        }
+        
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: 20px;
+            left: 25px;
+            font-size: 6rem;
+            color: rgba(219, 0, 17, 0.1);
+            font-weight: bold;
+        }
+        
+        .testimonial-content {
+            margin-top: 20px;
+            line-height: 1.8;
+            font-size: 1.1rem;
+            color: var(--dark-gray);
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            margin-top: 30px;
+        }
+        
+        .testimonial-author img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            margin-right: 15px;
+            object-fit: cover;
+            border: 3px solid var(--toyota-red);
+        }
+        
+        .author-info h4 {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+        
+        .author-info p {
+            color: var(--dark-gray);
+            opacity: 0.8;
+        }
+        
+        .rating {
+            margin-top: 5px;
+            color: #FFC107;
+        }
+        
+        /* 预约区域 */
+        .appointment {
+            padding: 30px 0 80px;
+            background-color: white;
+        }
+        
+        .appointment-container {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 40px;
+            background: var(--light-gray);
+            border-radius: 20px;
+            overflow: hidden;
+        }
+        
+        .appointment-info {
+            padding: 50px;
+            background: var(--toyota-black);
+            color: white;
+        }
+        
+        .appointment-form {
+            padding: 50px;
+        }
+        
+        .appointment-info h2 {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            position: relative;
+            padding-bottom: 20px;
+        }
+        
+        .appointment-info h2::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 80px;
+            height: 4px;
+            background-color: var(--toyota-red);
+        }
+        
+        .info-item {
+            margin-bottom: 30px;
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .info-item i {
+            font-size: 26px;
+            color: var(--toyota-red);
+            margin-right: 20px;
+            min-width: 30px;
+        }
+        
+        .info-content h3 {
+            font-size: 1.4rem;
+            margin-bottom: 8px;
+        }
+        
+        .appointment-form h3 {
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            color: var(--toyota-black);
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--dark-gray);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 16px 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--toyota-red);
+            box-shadow: 0 0 0 3px rgba(219, 0, 17, 0.1);
+        }
+        
+        select.form-control {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23555'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 15px center;
+            background-size: 20px;
+        }
+        
+        textarea.form-control {
+            min-height: 120px;
+        }
+        
+        .submit-btn {
+            width: 100%;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            padding: 18px;
+            transition: all 0.3s;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        /* 页脚 */
+        footer {
+            background-color: var(--toyota-black);
+            color: white;
+            padding: 80px 0 30px;
+            position: relative;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+        
+        .footer-column {
+            animation: slideIn 0.7s ease;
+        }
+        
+        .footer-column h3 {
+            position: relative;
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+            color: var(--toyota-red);
+            font-size: 1.5rem;
+        }
+        
+        .footer-column h3::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background-color: var(--toyota-red);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 15px;
+        }
+        
+        .footer-links a {
+            color: #bbb;
+            text-decoration: none;
+            transition: color 0.3s;
+            display: block;
+            padding: 5px 0;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+        
+        .footer-social {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background-color: #333;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-size: 18px;
+        }
+        
+        .social-link:hover {
+            background-color: var(--toyota-red);
+            transform: translateY(-3px);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid #333;
+            font-size: 0.95rem;
+            color: #999;
+        }
+        
+        /* 返回顶部按钮 */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background-color: var(--toyota-red);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            transition: all 0.4s;
+            z-index: 999;
+            box-shadow: 0 5px 15px rgba(219, 0, 17, 0.3);
+        }
+        
+        .back-to-top.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .back-to-top:hover {
+            background-color: var(--toyota-red-dark);
+            transform: translateY(-3px);
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 1200px) {
+            .hero h1 {
+                font-size: 3.3rem;
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .appointment-container {
+                grid-template-columns: 1fr;
+            }
+            
+            nav ul {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero-content {
+                width: 100%;
+                padding: 0 20px;
+                text-align: center;
+            }
+            
+            .hero-buttons {
+                justify-content: center;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero {
+                height: auto;
+                padding: 120px 0 80px;
+            }
+            
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2.3rem;
+            }
+            
+            .promo-content h2 {
+                font-size: 2.5rem;
+            }
+            
+            .countdown-item {
+                width: 90px;
+                height: 90px;
+            }
+            
+            .countdown-number {
+                font-size: 2.2rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .filter-btn {
+                padding: 8px 18px;
+                font-size: 0.9rem;
+            }
+            
+            .hero h1 {
+                font-size: 2.3rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .vehicle-footer {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 顶部导航 -->
+    <header>
+        <div class="top-bar">
+            <div class="container flex">
+                <div class="contact-info">
+                    <span><i class="fas fa-phone"></i> 400-888-0000</span>
+                    <span><i class="fas fa-map-marker-alt"></i> 惠州市惠城区水口联和村委会岭头长夫仔地段</span>
+                    <span><i class="fas fa-clock"></i> 营业时间：8:30-18:00</span>
+                </div>
+                <div class="social-icons">
+                    <a href="#" class="social-link"><i class="fab fa-weixin"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-weibo"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-tiktok"></i></a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="container flex header-main">
+            <div class="logo-container">
+                <div class="logo"></div>
+                <div>
+                    <div class="logo-text">天下行一汽丰田</div>
+                    <div class="logo-subtext">天下行一汽丰田授权4S店</div>
+                </div>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#home" class="active">首页</a></li>
+                    <li><a href="#vehicles">车型介绍</a></li>
+                    <li><a href="#services">服务项目</a></li>
+                    <li><a href="#about">购车指南</a></li>
+                    <li><a href="#contact">售后服务</a></li>
+                </ul>
+            </nav>
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <a href="#appointment" class="cta-button">预约试驾</a>
+        </div>
+    </header>
+
+    <!-- Hero区域 -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <h1>驾驭非凡<br>感受丰田品质</h1>
+                <p>天下行丰田授权4S店，提供全系丰田车型销售、专业维修保养及尊享服务</p>
+                <div class="hero-buttons">
+                    <a href="#vehicles" class="cta-button">查看车型 <i class="fas fa-car"></i></a>
+                    <a href="#appointment" class="cta-button">预约试驾 <i class="fas fa-calendar-alt"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 快速服务链接 -->
+    <section class="quick-links">
+        <div class="container">
+            <div class="quick-links-container">
+                <div class="quick-link-item" data-target="vehicles">
+                    <i class="fas fa-car"></i>
+                    <h3>车型导购</h3>
+                    <p>查看最新车型信息</p>
+                </div>
+                <div class="quick-link-item" data-target="services">
+                    <i class="fas fa-tools"></i>
+                    <h3>维修保养</h3>
+                    <p>专业维修服务</p>
+                </div>
+                <div class="quick-link-item" data-target="appointment">
+                    <i class="fas fa-calendar-check"></i>
+                    <h3>预约试驾</h3>
+                    <p>预约体验爱车</p>
+                </div>
+                <div class="quick-link-item" data-target="about">
+                    <i class="fas fa-file-invoice-dollar"></i>
+                    <h3>金融计划</h3>
+                    <p>灵活购车方案</p>
+                </div>
+                <div class="quick-link-item" data-target="contact">
+                    <i class="fas fa-exchange-alt"></i>
+                    <h3>车辆置换</h3>
+                    <p>高价回收旧车</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 主力车型展示 -->
+    <section class="vehicle-showcase" id="vehicles">
+        <div class="container">
+            <div class="section-title">
+                <h2>主力车型</h2>
+                <p>探索一汽丰田丰富的车型阵容，满足不同需求的消费者</p>
+            </div>
+            <div class="vehicle-filter">
+                <button class="filter-btn active" data-filter="all">全部车型</button>
+                <button class="filter-btn" data-filter="suv">SUV系列</button>
+                <button class="filter-btn" data-filter="sedan">轿车系列</button>
+                <button class="filter-btn" data-filter="hybrid">双擎混合动力</button>
+            </div>
+            <div class="vehicles">
+                <div class="vehicle-card">
+                    <div class="badge">热销推荐</div>
+                    <div class="vehicle-img" style="background-image: url('https://images.unsplash.com/photo-1617814076231-2c2bacd7a539?q=80&w=1080&auto=format&fit=crop')"></div>
+                    <div class="vehicle-info">
+                        <h3>RAV4荣放双擎</h3>
+                        <span class="price">¥229,800起</span>
+                        <div class="specs">
+                            <div class="spec"><i class="fas fa-gas-pump"></i> 双擎2.5L混合动力</div>
+                            <div class="spec"><i class="fas fa-car"></i> 中型SUV</div>
+                            <div class="spec"><i class="fas fa-tachometer-alt"></i> 综合功率163kW</div>
+                            <div class="spec"><i class="fas fa-road"></i> 百公里油耗5.0L</div>
+                        </div>
+                        <div class="vehicle-footer">
+                            <a href="#" class="cta-button" style="padding: 10px 20px;">了解详情</a>
+                            <a href="#appointment" style="color: var(--dark-gray); transition: color 0.3s;"><i class="fas fa-calendar-alt"></i> 试驾预约</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="vehicle-card">
+                    <div class="badge">新款上市</div>
+                    <div class="vehicle-img" style="background-image: url('https://images.unsplash.com/photo-1626774531386-424bec5491e5?q=80&w=1080&auto=format&fit=crop')"></div>
+                    <div class="vehicle-info">
+                        <h3>亚洲龙双擎</h3>
+                        <span class="price">¥259,800起</span>
+                        <div class="specs">
+                            <div class="spec"><i class="fas fa-gas-pump"></i> 双擎2.5L混合动力</div>
+                            <div class="spec"><i class="fas fa-car"></i> 豪华轿车</div>
+                            <div class="spec"><i class="fas fa-tachometer-alt"></i> 综合功率160kW</div>
+                            <div class="spec"><i class="fas fa-road"></i> 百公里油耗4.3L</div>
+                        </div>
+                        <div class="vehicle-footer">
+                            <a href="#" class="cta-button" style="padding: 10px 20px;">了解详情</a>
+                            <a href="#appointment" style="color: var(--dark-gray); transition: color 0.3s;"><i class="fas fa-calendar-alt"></i> 试驾预约</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="vehicle-card">
+                    <div class="badge">经济实用</div>
+                    <div class="vehicle-img" style="background-image: url('https://images.unsplash.com/photo-1606741113328-6e7899af535a?q=80&w=1080&auto=format&fit=crop')"></div>
+                    <div class="vehicle-info">
+                        <h3>卡罗拉锐放</h3>
+                        <span class="price">¥147,800起</span>
+                        <div class="specs">
+                            <div class="spec"><i class="fas fa-gas-pump"></i> 2.0L自然吸气</div>
+                            <div class="spec"><i class="fas fa-car"></i> 紧凑型SUV</div>
+                            <div class="spec"><i class="fas fa-tachometer-alt"></i> 最大功率126kW</div>
+                            <div class="spec"><i class="fas fa-road"></i> 百公里油耗5.9L</div>
+                        </div>
+                        <div class="vehicle-footer">
+                            <a href="#" class="cta-button" style="padding: 10px 20px;">了解详情</a>
+                            <a href="#appointment" style="color: var(--dark-gray); transition: color 0.3s;"><i class="fas fa-calendar-alt"></i> 试驾预约</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 服务项目 -->
+    <section class="services" id="services">
+        <div class="container">
+            <div class="section-title">
+                <h2>专业服务</h2>
+                <p>全方位汽车服务，为您提供购车、用车全生命周期的解决方案</p>
+            </div>
+            <div class="services-container">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-car-alt"></i>
+                    </div>
+                    <h3>整车销售</h3>
+                    <p>提供一汽丰田全系新车的销售服务，包括轿车、SUV及MPV等。专业销售顾问为您提供详细的车型讲解和购车方案。购车享受厂家原厂质保及各类购车优惠。</p>
+                    <a href="#" class="cta-button" style="padding: 10px 25px;">了解详情</a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <h3>专业维修</h3>
+                    <p>采用丰田原厂配件和技术标准，由丰田认证的资深技师团队为您的爱车提供精准维修服务。提供快速钣金喷漆、机电维修、电子系统诊断等一站式服务。</p>
+                    <a href="#" class="cta-button" style="padding: 10px 25px;">了解详情</a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-oil-can"></i>
+                    </div>
+                    <h3>专业保养</h3>
+                    <p>严格按照丰田原厂标准进行保养作业，使用丰田纯正机油及配件。提供定制化保养套餐，包括免费检测、快速保养服务通道、预约保养工时费优惠等专属服务。</p>
+                    <a href="#" class="cta-button" style="padding: 10px 25px;">了解详情</a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-exchange-alt"></i>
+                    </div>
+                    <h3>二手车业务</h3>
+                    <p>提供公正专业的二手车评估服务，支持旧车置换新车。在售二手车经过200多项专业检测，提供1年或2万公里质保，让您购车无忧。</p>
+                    <a href="#" class="cta-button" style="padding: 10px 25px;">了解详情</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 促销活动 -->
+    <section class="promotion">
+        <div class="container">
+            <div class="promo-content">
+                <h2>限时购车优惠</h2>
+                <p>年底大促，多款热门车型直降30000元起，金融贴息、保险补贴、原厂大礼包等多重好礼相送</p>
+                
+                <div class="countdown">
+                    <div class="countdown-item">
+                        <div class="countdown-number">07</div>
+                        <div>天</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-number">16</div>
+                        <div>小时</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-number">35</div>
+                        <div>分钟</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-number">28</div>
+                        <div>秒</div>
+                    </div>
+                </div>
+                
+                <a href="#appointment" class="cta-button" style="padding: 15px 40px;">立即抢购</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 预约区域 -->
+    <section class="appointment" id="appointment">
+        <div class="container">
+            <div class="appointment-container">
+                <div class="appointment-info">
+                    <h2>预约试驾</h2>
+                    <div class="info-item">
+                        <i class="fas fa-phone-alt"></i>
+                        <div class="info-content">
+                            <h3>预约热线</h3>
+                            <p>400-888-0000</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-clock"></i>
+                        <div class="info-content">
+                            <h3>工作时间</h3>
+                            <p>周一至周五: 8:30 - 18:00</p>
+                            <p>周六至周日: 8:30 - 18:00</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div class="info-content">
+                            <h3>地址</h3>
+                            <p>惠州市惠城区水口联和村委会岭头长夫仔地段</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-check-circle"></i>
+                        <div class="info-content">
+                            <h3>温馨提示</h3>
+                            <p>提前一天预约，体验专人接待服务</p>
+                            <p>提供试驾保险及1小时深度试驾体验</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="appointment-form">
+                    <h3>预约咨询</h3>
+                    <form id="appointmentForm">
+                        <div class="form-group">
+                            <label for="name">姓名</label>
+                            <input type="text" id="name" class="form-control" placeholder="您的姓名" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">手机号码</label>
+                            <input type="tel" id="phone" class="form-control" placeholder="请输入手机号" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="service">服务类型</label>
+                            <select id="service" class="form-control">
+                                <option value="test-drive">预约试驾</option>
+                                <option value="maintain">预约保养</option>
+                                <option value="estimate">车辆评估</option>
+                                <option value="consult">购车咨询</option>
+                                <option value="others">其他需求</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="model">意向车型</label>
+                            <select id="model" class="form-control">
+                                <option value="">请选择车型</option>
+                                <option value="RAV4">RAV4荣放</option>
+                                <option value="Avalon">亚洲龙</option>
+                                <option value="Corolla">卡罗拉/锐放</option>
+                                <option value="Allion">亚洲狮</option>
+                                <option value="Camry">凯美瑞</option>
+                                <option value="unknown">尚未确定</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="date">预约时间</label>
+                            <input type="date" id="date" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">特别说明 (选填)</label>
+                            <textarea id="message" class="form-control" placeholder="如有特别说明或需求请在此填写"></textarea>
+                        </div>
+                        <button type="submit" class="cta-button submit-btn">提交预约</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <div class="logo-container" style="margin-bottom: 20px;">
+                        <div class="logo"></div>
+                        <div>
+                            <div class="logo-text" style="color: white; line-height: 1.3;">天下行一汽丰田</div>
+                        </div>
+                    </div>
+                    <p style="color: #bbb; line-height: 1.8; margin-bottom: 20px;">天下行一汽丰田授权4S店，成立于2020年，是惠州地区规模最大的丰田经销商之一。我们致力于为客户提供高品质的购车体验和专业的售后服务。</p>
+                    <div class="footer-social">
+                        <a href="#" class="social-link"><i class="fab fa-weixin"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-weibo"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-tiktok"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>热门车型</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">RAV4荣放系列</a></li>
+                        <li><a href="#">卡罗拉/锐放系列</a></li>
+                        <li><a href="#">亚洲龙系列</a></li>
+                        <li><a href="#">凌放系列</a></li>
+                        <li><a href="#">皇冠系列</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>客户服务</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">预约试驾</a></li>
+                        <li><a href="#">预约维修保养</a></li>
+                        <li><a href="#">24小时道路救援</a></li>
+                        <li><a href="#">保险续保服务</a></li>
+                        <li><a href="#">二手车置换</a></li>
+                        <li><a href="#">车主俱乐部</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>联系方式</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-phone-alt"></i> 销售热线: 400-888-0000</li>
+                        <li><i class="fas fa-tools"></i> 服务热线: 400-888-0001</li>
+                        <li><i class="fas fa-road"></i> 救援热线: 400-888-9999</li>
+                        <li><i class="fas fa-map-marker-alt"></i> 惠州市惠城区水口联和村委会岭头长夫仔地段</li>
+                        <li><i class="fas fa-envelope"></i> contact@toyota-nf.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 惠州天下行丰田汽车销售服务有限公司 版权所有 | 粤ICP备12345678号-1</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 返回顶部按钮 -->
+    <div class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <script>
+        // 页面滚动效果
+        document.addEventListener('DOMContentLoaded', function() {
+            // 返回顶部按钮
+            const backToTopBtn = document.getElementById('backToTop');
+            
+            // 监听滚动事件
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 300) {
+                    backToTopBtn.classList.add('visible');
+                } else {
+                    backToTopBtn.classList.remove('visible');
+                }
+            });
+            
+            // 返回顶部功能
+            backToTopBtn.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+            
+            // 快速链接跳转
+            const quickLinks = document.querySelectorAll('.quick-link-item');
+            quickLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    const target = this.getAttribute('data-target');
+                    document.getElementById(target).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+            
+            // 车型筛选功能
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // 移除所有按钮的active类
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    // 添加当前按钮的active类
+                    this.classList.add('active');
+                    
+                    // 这里应该实现筛选功能的逻辑
+                    alert(`显示${this.textContent}类型的车辆`);
+                });
+            });
+            
+            // 预约表单提交处理
+            const appointmentForm = document.getElementById('appointmentForm');
+            if (appointmentForm) {
+                appointmentForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    alert('预约信息已提交成功！我们的客服会尽快与您联系');
+                    this.reset();
+                });
+            }
+            
+            // 导航点击效果
+            const navLinks = document.querySelectorAll('nav ul li a');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // 移除所有链接的active类
+                    navLinks.forEach(l => l.classList.remove('active'));
+                    // 添加当前链接的active类
+                    this.classList.add('active');
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId.startsWith('#')) {
+                        document.querySelector(targetId).scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+        
+        // 显示当前年份
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentYear = new Date().getFullYear();
+            const copyrightElement = document.querySelector('.footer-bottom p');
+            if (copyrightElement) {
+                copyrightElement.innerHTML = copyrightElement.innerHTML.replace('2023', '2023-' + currentYear);
+            }
+            
+            // 展示预约按钮动画
+            setTimeout(() => {
+                const ctaButtons = document.querySelectorAll('.cta-button');
+                ctaButtons.forEach(button => {
+                    button.style.opacity = '1';
+                    button.style.transform = 'translateY(0)';
+                });
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
